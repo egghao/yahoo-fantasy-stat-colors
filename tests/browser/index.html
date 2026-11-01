@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Population browser test</title>
+<pre id="result">Running</pre>
+<script src="/extension/population.js"></script><script>
+(async () => {
+  const results = document.querySelector('#result');
+  try {
+    const page = (offset) => `<!doctype html><select id="statusselect"><option value="ALL" selected>All Players</option></select><input type="radio" name="pos" value="P" checked><select id="statselect"><option value="S_AS_2026" selected>Season</option></select><table><thead><tr><th>Players</th><th>Roster Status</th><th>GP*</th><th>MPG</th><th>PTS</th></tr></thead><tbody>${Array.from({length:offset ? 2 : 25},(_,i)=>`<tr><td><a id="playernote-${offset+i+1}">Player</a></td><td>Private team</td><td>5</td><td>20:00</td><td>${offset+i}</td></tr>`).join('')}</tbody></table><ul id="playerspagenav1"><li class="last">${offset?'Next 25':'<a href="?count=25">Next 25</a>'}</li></ul>`;
+    const fetchPage = createYahooPageFetcher({fetchImpl: async url => ({ok:true, status:200, url, text:async()=>page(Number(new URL(url).searchParams.get('count')))})});
+    const result = await collectPopulation({url:'https://basketball.fantasysports.yahoo.com/nba/123/players?stat1=S_AS_2026',fetchPage});
+    if (result.pages !== 2 || result.players.length !== 27 || result.players[0].values.PTS !== '0' || result.players[0].values['Roster Status'] !== undefined) throw new Error('Incorrect result');
+    results.textContent = 'PASS: parsed 27 players across 2 pages; private roster status omitted';
+  } catch (error) { results.textContent = 'FAIL: ' + error.message; }
+})();
+</script></html>

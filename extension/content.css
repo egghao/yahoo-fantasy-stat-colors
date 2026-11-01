@@ -1,0 +1,25 @@
+#fantasy-stat-colors { padding: 10px 12px; margin: 10px 0; border: 1px solid #d6d9de; border-radius: 8px; background: #fff; color: #20252b; font: 13px/1.5 system-ui, sans-serif; }
+#fantasy-stat-colors button { border: 1px solid #aab3bf; background: #fff; color: #20252b; border-radius: 5px; padding: 3px 8px; margin-left: 10px; cursor: pointer; }
+#fantasy-stat-colors button:disabled { opacity: .55; cursor: wait; }
+#fantasy-stat-colors .fsc-legend { display: inline-block; width: 100px; height: 9px; border-radius: 8px; margin: 0 6px; background: linear-gradient(to right, rgb(234,174,162), rgb(250,250,250), rgb(163,207,175)); }
+
+/* Pin the two Yahoo action columns together with the player name. */
+.fsc-sticky-table { border-collapse: separate; border-spacing: 0; }
+.fsc-sticky-table tbody tr > :nth-child(-n+3),
+.fsc-sticky-table thead tr:nth-child(2) > :nth-child(-n+3),
+.fsc-sticky-table thead tr:first-child > :first-child {
+  position: sticky; background: #fff; z-index: 2;
+}
+.fsc-sticky-table tbody tr > :nth-child(1),
+.fsc-sticky-table thead tr:nth-child(2) > :nth-child(1),
+.fsc-sticky-table thead tr:first-child > :first-child { left: 0; }
+.fsc-sticky-table tbody tr > :nth-child(2),
+.fsc-sticky-table thead tr:nth-child(2) > :nth-child(2) { left: var(--fsc-left-one); }
+.fsc-sticky-table tbody tr > :nth-child(3),
+.fsc-sticky-table thead tr:nth-child(2) > :nth-child(3) { left: var(--fsc-left-two); }
+.fsc-sticky-table thead th, .fsc-sticky-table thead td { background: #f0f2f4; }
+.fsc-sticky-table thead tr:nth-child(2) > :nth-child(-n+3),
+.fsc-sticky-table thead tr:first-child > :first-child { background: #f0f2f4; z-index: 3; }
+.fsc-floating-header { position: fixed; top: 0; z-index: 1000; overflow: hidden; }
+.fsc-floating-header[hidden] { display: none; }
+.fsc-floating-header table { margin: 0; table-layout: fixed; }

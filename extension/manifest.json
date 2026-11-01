@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Fantasy Basketball Stat Colors",
+  "version": "0.1.0",
+  "description": "Colors Yahoo Fantasy Basketball player statistics by their rank among eligible players.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://basketball.fantasysports.yahoo.com/*"],
+  "content_scripts": [{
+    "matches": ["https://basketball.fantasysports.yahoo.com/*"],
+    "js": ["percentile.js", "population.js", "coloring.js", "sticky.js", "content.js"],
+    "css": ["content.css"],
+    "run_at": "document_idle"
+  }]
+}
